@@ -9,6 +9,8 @@ import PhotographsPage from './pages/photographs/PhotographsPage';
 import ReadEventPage from './pages/events/ReadEventPage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
+import EventDetailPage from './pages/photographs/EventDetailPage';
+import UploadPhotoPage from './pages/photographs/uploadPhotoPage';
 
 function App() {
   // options
@@ -62,7 +64,9 @@ function App() {
             </div>
           }>
             <Route index element={<PhotographsPage />} />
-            <Route path='eventos' element={<Events />} />
+            <Route path='eventos' element={<PhotographsPage />} />
+            <Route path='eventos/:id' element={<EventDetailPage />} />
+            <Route path='eventos/:id/images' element={<UploadPhotoPage />} />
           </Route>
 
         </Routes>

@@ -2,10 +2,15 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import api from "../../api/gatewayApi";
+import { useEffect, useState } from "react";
 
 export default function LoginPage() {
   // navigate
   const navigate = useNavigate();
+
+  // states
+  const [roles, setRoles] = useState([]);
+  const [rol, setRole] = useState("");
 
   //form
   const {
@@ -13,6 +18,18 @@ export default function LoginPage() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    api
+      .get("/rol")
+      .then((res) => {
+        console.log(res.data);
+        setRoles(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   // ESTA FUNCION ES PARA MANEJAR LA NAVEGACION DEL USUARIO DESPUES DE LOGUEARSE
 
@@ -45,19 +62,30 @@ export default function LoginPage() {
   // };
 
   const handleProviderSubmit = (data) => {
-    //crear
-    api
-      .post("/auth/login", data)
-      .then((res) => {
-        const token = res.data.token;
-        localStorage.setItem("token", token);
-      // AQUI SE LLAMA A LA FUNCION PARA MANEJAR LA NAVEGACIÓN DEL USUARIO LOGUEADO
-        // handleUser();
-        navigate('/dashboard');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (rol === "Organizador") {
+      // Iniciar sesion como organizador
+      api
+        .post("/auth/organizer/signin", data)
+        .then((res) => {
+          localStorage.setItem("idOganizer", res.data.id);
+          navigate("/organizadores/eventos");
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    } else {
+      // iniciar sesion como fotografo
+      api
+        .post("/auth/photographer/signin", data)
+        .then((res) => {
+          const token = res.data.token;
+          localStorage.setItem("idPhotographer", res.data.id);
+          navigate('/fotografos');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
   return (
     <div className="container">
@@ -74,6 +102,22 @@ export default function LoginPage() {
             className="row g-3"
             onSubmit={handleSubmit(handleProviderSubmit)}
           >
+            <div className="col-12">
+              <label className="form-label">Tipo de usuario:</label>
+              <select 
+                className="form-select" 
+                aria-label="Default select example"
+                value={rol}
+                onChange={(e) => setRole(e.target.value)}
+              >
+                <option>Seleccionar</option>
+                {roles.map((rol) => {
+                  return (
+                    <option key={rol.id} value={rol.name}>{rol.name}</option>
+                  )
+                })}
+              </select>
+            </div>
             <div className="col-12">
               <label className="form-label">Correo Electronico</label>
               <input
