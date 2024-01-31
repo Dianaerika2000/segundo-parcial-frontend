@@ -14,6 +14,36 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm();
 
+  // ESTA FUNCION ES PARA MANEJAR LA NAVEGACION DEL USUARIO DESPUES DE LOGUEARSE
+
+  // const handleUser = () => {
+  //     const fetchUser = async () => {
+  //     try {
+  //         const token = localStorage.getItem("token");
+  //         const response = await api.get('/usuario/token', {
+  //             headers: {
+  //                 "x-token": token
+  //             }
+  //         })
+  //         .then((response)=>{
+  //           usuario = response.data.usuario;
+
+  //           switch (usuario.rol.name) {
+  //             case 'Organizador':
+  //                 return navigate('/organizadores')
+  //             case 'Fotografo':
+  //                 return navigate('/fotografos')
+  //             default:
+  //                 return navigate('/')
+  //           }
+  //         });
+  //     } catch (error) {
+  //         console.error(error);
+  //     }
+  //     };
+  //     fetchUser();
+  // };
+
   const handleProviderSubmit = (data) => {
     //crear
     api
@@ -21,6 +51,8 @@ export default function LoginPage() {
       .then((res) => {
         const token = res.data.token;
         localStorage.setItem("token", token);
+      // AQUI SE LLAMA A LA FUNCION PARA MANEJAR LA NAVEGACIÓN DEL USUARIO LOGUEADO
+        // handleUser();
         navigate('/dashboard');
       })
       .catch((err) => {

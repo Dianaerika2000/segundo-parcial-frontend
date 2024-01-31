@@ -16,6 +16,18 @@ function App() {
     { option: 'bi bi-question-circle', to: '/ayuda' },
     { option: 'bi bi-gear', to: '/configuracion' },
   ];
+
+  const menuItemsFotografo = [
+    { icon: 'bi-grid-fill', name: 'Inicio', route: '/fotografos' },
+    { icon: 'bi-calendar', name: 'Mis Eventos', route: '/fotografos/eventos' },
+    // { icon: 'bi-camera', name: 'Gestionar Fotografos', route: '/fotografos/fotografos' },
+  ];
+  const menuItemsOrganizador = [
+    { icon: 'bi-grid-fill', name: 'Inicio', route: '/organizadores' },
+    { icon: 'bi-grid-fill', name: 'Gestionar Eventos', route: '/organizadores/eventos' },
+    { icon: 'bi-calendar', name: 'Gestionar Invitados', route: '/organizadores/fotografos' },
+    // { icon: 'bi-camera', name: 'Gestionar Fotografos', route: '/fotografos' },
+  ];
   return (
     <div>
       <BrowserRouter>
@@ -26,28 +38,31 @@ function App() {
           <Route path='/registro' element={<RegisterPage />}/>
           {/* <Route path='/' element={<LoginPage/>} /> */}
 
-          <Route path='/eventos' element={
+          <Route path='/organizadores' element={
             <div className='d-flex'>
               <div className="col-2">
-                <SideBar />
+                <SideBar menuItems={menuItemsOrganizador}/>
               </div>
               <Outlet />
             </div>
           }>
-            <Route index element={<Events />} />
-            <Route path='crear' element={<CreateEvent />} />
+            <Route index element={<PhotographsPage />} />                    {/* Aqui debe ir la vista con el listado de fotografias como home */}
+            <Route path='eventos' element={<Events />} />
+            <Route path='eventos/crear' element={<CreateEvent />} />
+            <Route path='fotografos' element={<CreateEvent />} />
             <Route path=':id' element={<ReadEventPage />} />
           </Route>
 
           <Route path='/fotografos' element={
             <div className='d-flex'>
               <div className="col-2">
-                <SideBar/>
+                <SideBar menuItems={menuItemsFotografo}/>
               </div>
               <Outlet />
             </div>
           }>
             <Route index element={<PhotographsPage />} />
+            <Route path='eventos' element={<Events />} />
           </Route>
 
         </Routes>

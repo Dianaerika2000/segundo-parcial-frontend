@@ -21,6 +21,7 @@ export default function RegisterPage() {
     api
       .get("/rol")
       .then((res) => {
+        console.log(res.data);
         setRoles(res.data);
       })
       .catch((err) => {
@@ -32,25 +33,24 @@ export default function RegisterPage() {
   const handleProviderSubmit = (data) => {
     if (data.rol === "2") {
       console.log('data', data);
-      // api
-      //   .post("/auth/register", data)
-      //   .then((res) => {
-      //     console.log(res);
-      //     navigate("/");
-      //   })
-      //   .catch((err) => {
-      //     console.log(err.response.data);
-      //   });
-    }else{
-      
-      // api.post("/auth/register", data)
-      // .then((res) => {
-      //   console.log(res);
-      //   navigate("/");
-      // })
-      // .catch((err) => {
-      //   console.log(err.response.data);
-      // });
+      api
+        .post("/auth/register", data)
+        .then((res) => {
+          console.log(res);
+          navigate("/organizadores");
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    }else{    
+      api.post("/auth/register", data)
+      .then((res) => {
+        console.log(res);
+        navigate("/fotografos");
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
     }
   }
   return (

@@ -30,7 +30,7 @@ export default function Events() {
         <div className="col-12">
           <Link
             className="btn btn-primary"
-            to="/eventos/crear"
+            to="/organizadores/eventos/crear"
           >
             <i className="bi bi-plus-square-fill"></i> Crear Evento
           </Link>
