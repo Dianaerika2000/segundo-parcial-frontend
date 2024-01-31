@@ -25,6 +25,14 @@ export default function SideBar() {
               Gestionar Eventos
             </NavLink>
           </li>
+          <li className="my-1 mx-2">
+            <NavLink to="/fotografos"
+              className={({ isActive }) => (isActive ? "nav-link active bg-primary rounded text-light" : "nav-link")}
+            >
+              <i className="bi bi-calendar icono"></i>&nbsp;
+              Gestionar Fotografos
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </aside>

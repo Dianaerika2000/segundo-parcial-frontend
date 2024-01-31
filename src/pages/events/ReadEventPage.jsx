@@ -14,7 +14,6 @@ export default function ReadEventPage() {
     api
       .get(`/event/${id}`)
       .then((res) => {
-        console.log(res.data);
         setEvent(res.data);
       })
       .catch((err) => {
@@ -24,7 +23,6 @@ export default function ReadEventPage() {
     api
       .get("/photographer")
       .then((res) => {
-        console.log(res.data);
         setPhotographers(res.data);
       })
       .catch((err) => {
