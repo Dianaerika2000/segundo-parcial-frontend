@@ -31,22 +31,28 @@ export default function RegisterPage() {
 
   // Handlers
   const handleProviderSubmit = (data) => {
-    if (data.rol === "2") {
-      console.log('data', data);
+    console.log('id', data.rolId)
+    if (data.rolId == "2") {
+      // registrar organizador
       api
-        .post("/auth/register", data)
+        .post("/auth/organizer/signup", {...data, rolId: +data.rolId})
         .then((res) => {
-          console.log(res);
-          navigate("/organizadores");
+          localStorage.setItem("idOganizer", res.data.id);
+          navigate("/");
         })
         .catch((err) => {
           console.log(err.response.data);
         });
-    }else{    
-      api.post("/auth/register", data)
+    }else{
+      // registrar fotografo
+      api.post("/auth/photographer/signup", {
+        ...data, 
+        rolId: +data.rolId, 
+        photographicSpecialties: 'Por definir'
+      })
       .then((res) => {
-        console.log(res);
-        navigate("/fotografos");
+        localStorage.setItem("idPhotographer", res.data.id);
+        navigate("/");
       })
       .catch((err) => {
         console.log(err.response.data);
