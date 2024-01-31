@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Card({ icon, title, date, time, onClick }) {
+export default function Card({ id, icon, title, date, time, onClick }) {
   return (
     <div className="card shadow border-white">
       <img src="https://res.cloudinary.com/dwhmsrfva/image/upload/v1696700327/room_m7ooqc.png" className="card-img-top" alt="..." />
@@ -12,7 +12,7 @@ export default function Card({ icon, title, date, time, onClick }) {
           <button className="btn btn-outline-primary">
           <i className="bi bi-pencil-square"></i> Editar
           </button>
-          <Link className="btn btn-outline-primary" to="">
+          <Link className="btn btn-outline-primary" to={`${id}`}>
             <i className="bi bi-eye" /> Ver más
           </Link>
         </div>

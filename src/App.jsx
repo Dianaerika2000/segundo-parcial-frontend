@@ -5,6 +5,8 @@ import SideBar from './components/SideBar';
 import HomePage from './pages/HomePage';
 import Events from './pages/events/Events';
 import CreateEvent from './pages/events/CreateEvent';
+import PhotographsPage from './pages/photographs/PhotographsPage';
+import ReadEventPage from './pages/events/ReadEventPage';
 
 function App() {
   // options
@@ -27,6 +29,11 @@ function App() {
               <Route path='/eventos'>
                 <Route index element={<Events/>} />
                 <Route path='crear' element={<CreateEvent/>} />
+                <Route path=':id' element={<ReadEventPage/>} />
+              </Route>
+
+              <Route path='/fotografias'>
+                <Route index element={<PhotographsPage/>} />
               </Route>
 
             </Routes>

@@ -40,7 +40,8 @@ export default function Events() {
         {events.map((event) => {
           return (
             <div className="col-3" key={event.id}>
-              <Card 
+              <Card
+                id={event.id} 
                 title={event.name} 
                 date={`Fecha: ${event.date}`} 
                 time={`Hora: ${event.time}`} />
