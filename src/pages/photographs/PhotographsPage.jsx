@@ -11,6 +11,7 @@ export default function PhotographsPage() {
   const [events, setEvents] = useState([]);
   
   const photographerId = +localStorage.getItem("idPhotographer");
+  console.log('photographerId', photographerId);
   // initial values
   useEffect(() => {
     api

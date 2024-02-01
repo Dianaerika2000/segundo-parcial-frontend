@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import api from "../../api/gatewayApi";
 
@@ -10,8 +10,10 @@ export default function CreateEvent() {
   const [guests, setGuests] = useState([]);
   const [email, setEmail] = useState("");
   const [cant, setCant] = useState(0);
+  const [photographer, setPhotographer] = useState("");
+  const [photographers, setPhotographers] = useState([]); 
 
-  const organizerId = +localStorage.getItem("organizerId");
+  const organizerId = +localStorage.getItem("idOganizer");
 
   //form
   const {
@@ -22,13 +24,13 @@ export default function CreateEvent() {
 
   // Handlers
   const handleCreateEvent = (data) => {
-    const eventData = {...data, people: guests, organizerId: 1};
+    const eventData = { ...data, people: guests, organizerId: organizerId, photographerEmail: photographer};
     console.log('eventData', eventData);
     //crear
     api
       .post("/event", eventData)
       .then((res) => {
-        navigate("/eventos");
+        navigate("/fotografos/eventos");
       })
       .catch((err) => {
         console.log(err);
@@ -46,6 +48,19 @@ export default function CreateEvent() {
 
     setGuests(updatedGuests);
   };
+  
+  // initial values
+  useEffect(() => {
+    api
+      .get("/photographer")
+      .then((res) => {
+        console.log(res.data);
+        setPhotographers(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className="container m-5">
@@ -95,6 +110,24 @@ export default function CreateEvent() {
           />
           {errors?.address?.type === "required" && <p className="text-danger">El campo dirección es obligatorio*</p>}
         </div>
+
+        <h4 className="m-5 text-center">Invita a un fotografo a cubrir el evento</h4>
+        <div className="row d-flex align-items-end">
+          <select className="form-select" 
+            aria-label="Default select example"
+            value={photographer}
+            onChange={(e) => setPhotographer(e.target.value)}
+          >
+            <option selected>Seleccionar un fotografo</option>
+            {photographers.map((photographer) => {
+              return (
+                <option key={photographer.id} value={photographer.email}>{photographer.name}</option>
+              );
+            })}
+          </select>
+        </div>
+
+
 
         <h4 className="m-3 text-center">Ingresa los datos de los invitados</h4>
 
@@ -155,7 +188,7 @@ export default function CreateEvent() {
           </div>
         </div>
         <div className="col-12 text-end mt-3">
-          <Link className="btn btn-secondary me-2" to={'/eventos'}>
+          <Link className="btn btn-secondary me-2" to={'/organizadores/eventos'}>
             Cancelar
           </Link>
           <button type="submit" className="btn btn-primary">

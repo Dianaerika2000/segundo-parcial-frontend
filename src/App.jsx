@@ -11,6 +11,7 @@ import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import EventDetailPage from './pages/photographs/EventDetailPage';
 import UploadPhotoPage from './pages/photographs/uploadPhotoPage';
+import InvitationPage from './pages/photographs/InvitationPage';
 
 function App() {
   // options
@@ -22,6 +23,7 @@ function App() {
   const menuItemsFotografo = [
     { icon: 'bi-grid-fill', name: 'Inicio', route: '/fotografos' },
     { icon: 'bi-calendar', name: 'Mis Eventos', route: '/fotografos/eventos' },
+    { icon: 'bi-envelope-arrow-down', name: 'Gestionar Invitaciones', route: '/fotografos/invitaciones' },
     // { icon: 'bi-camera', name: 'Gestionar Fotografos', route: '/fotografos/fotografos' },
   ];
   const menuItemsOrganizador = [
@@ -67,6 +69,7 @@ function App() {
             <Route path='eventos' element={<PhotographsPage />} />
             <Route path='eventos/:id' element={<EventDetailPage />} />
             <Route path='eventos/:id/images' element={<UploadPhotoPage />} />
+            <Route path='invitaciones' element={<InvitationPage />} />
           </Route>
 
         </Routes>
