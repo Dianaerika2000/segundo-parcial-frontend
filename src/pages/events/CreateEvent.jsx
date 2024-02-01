@@ -30,7 +30,7 @@ export default function CreateEvent() {
     api
       .post("/event", eventData)
       .then((res) => {
-        navigate("/fotografos/eventos");
+        navigate("/organizadores/eventos");
       })
       .catch((err) => {
         console.log(err);
