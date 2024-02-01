@@ -4,8 +4,9 @@ import PropTypes from 'prop-types'
 export default function SideBar({ menuItems }) {
   return (
     <aside className="bg-white shadow-sm text-dark w-full">
-      <div className="text-center border-bottom pb-3">
-        <h2 className="text-2xl font-[Georgia] font-bold">YourEvents</h2>
+      <div className="text-center border-bottom pb-3 ">
+        {/* <h2 className="text-2xl font-[Georgia] font-bold">YourEvents</h2> */}
+        <img src="https://res.cloudinary.com/dwhmsrfva/image/upload/v1706805545/logo_jlrydt.png" alt="logo" className='img-fluid'/>
       </div>
       <nav>
         <ul className='nav flex-column vh-100'>

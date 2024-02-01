@@ -7,7 +7,7 @@ export default function NavBar({ opciones }) {
       <div className="container">
         <Link className="navbar-brand text-light" to="">
           {/* <img src="https://res.cloudinary.com/dwhmsrfva/image/upload/v1696700327/room_m7ooqc.png" alt="Logo" width="60" height="80" className="d-inline-block align-text-top"/> */}
-          <span className="material-symbols-outlined custom-icon">CoDesignFlow</span>
+          {/* <span className="material-symbols-outlined custom-icon">Snap</span> */}
         </Link>
         {/* Button collapse */}
         <button
